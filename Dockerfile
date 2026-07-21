@@ -23,3 +23,6 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 RUN composer install --no-dev --optimize-autoloader
 
 EXPOSE 80
+
+# Run migrations and start Apache server automatically on boot
+CMD ["sh", "-c", "php artisan migrate --force && php artisan config:cache && apache2-foreground"]
